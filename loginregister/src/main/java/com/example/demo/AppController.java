@@ -17,10 +17,10 @@ package com.example.demo;
 				String date = greeting.getDate();
 				System.out.println(time);
 				System.out.println(date);
-				String date1 = date.replaceAll("-","/");
-				List<Object[]> listData = service.listData(time);
+				String date1 = date.replaceAll('-','/');
+				List<Object[]> listData = service.listData(time,date1);
 				model.addAttribute("listData", listData);
-				List<Object[]> listTime = service.listTime(time);
+				List<Object[]> listTime = service.listTime(time,date1);
 				model.addAttribute("listTime", listTime);		
 				return "ChartLine";		
 	    }	
