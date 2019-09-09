@@ -16,12 +16,12 @@ package com.example.demo;
 			return repo.findAll();
 		}
 		
-		public List<Object[]> listData(String time) {
-			return repo.findByTag00(time);
+		public List<Object[]> listData(String time, String date ) {
+			return repo.findByTag00(time,date);
 		}
 		
-		public List<Object[]> listTime(String time) {
-			return repo.findByTime(time);
+		public List<Object[]> listTime(String time, String date) {
+			return repo.findByTime(time,date);
 		}
 		
 		public void save(Product product) {
