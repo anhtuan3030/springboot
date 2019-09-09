@@ -17,7 +17,7 @@ package com.example.demo;
 				String date = greeting.getDate();
 				System.out.println(time);
 				System.out.println(date);
-				String date1 = date.replaceAll('-','/');
+				String date1 = date.replace('-','/');
 				List<Object[]> listData = service.listData(time,date1);
 				model.addAttribute("listData", listData);
 				List<Object[]> listTime = service.listTime(time,date1);

@@ -16,7 +16,7 @@ package com.example.demo;
 			return repo.findAll();
 		}
 		
-		public List<Object[]> listData(String time, String date ) {
+		public List<Object[]> listData(String time, String date) {
 			return repo.findByTag00(time,date);
 		}
 		
