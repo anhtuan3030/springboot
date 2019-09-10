@@ -1,126 +1,129 @@
-	<!DOCTYPE html>
-		<html xmlns="http://www.w3.org/1999/xhtml"
-		      xmlns:th="http://www.thymeleaf.org">
-		
-		<div  style="position:relative;left:50px;top:5px;"	> <!-- Position: relative(tuong quan theo left,right,bottom,top), absolute,fixed -->
-			 <a href="/home">Home</a>  	 
-		</div> 
-		
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-		<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.5.0"></script> <!-- thu vien dung de hien thi gia tri tren bieu do -->
-		
-		<div class="container">
-		    <canvas id="ChartLine"></canvas>
-		</div>
-		<div class="container">
-		    <canvas id="myChart" width ="350" height="350"></canvas>
-		</div>
-		
-		<body>
-		<div id ="container">
-		
-			<form action="#" th:action="@{/ChartLine}" th:object="${greeting}" method="post">
-			Enter a date :<br>
-			<select name ="time" th:field="*{time}">
-			  <option value="00">0h</option>
-			  <option value="01">1h</option>
-			  <option value="02">2h</option>
-			  <option value="03">3h</option>
-			  <option value="04">4h</option>
-			  <option value="05">5h</option>
-			  <option value="06">6h</option>
-			  <option value="07">7h</option>
-			  <option value="08">8h</option>
-			  <option value="09">9h</option>
-			  <option value="10">10h</option>
-			  <option value="11">11h</option>
-			  <option value="12">12h</option>
-			  <option value="13">13h</option>
-			  <option value="14">14h</option>
-			  <option value="15">15h</option>
-			  <option value="16">16h</option>
-			  <option value="17">17h</option>
-			  <option value="18">18h</option>
-			  <option value="19">19h</option>
-			  <option value="20">20h</option>
-			  <option value="21">21h</option>
-			  <option value="22">22h</option>
-			  <option value="23">23h</option>
-			</select>
-			<input type="date"  th:field="*{date}" ><br>
-			<input type="submit"> 
-			</form>
-			<div  th:object = "${greeting}" > 
-			    <span  th:text = "*{time}" ></span>
-			    <span  th:text = "*{date}" ></span>
-			</div>
-		
-			<div id ="content">
-			<script th:inline="javascript"> //dung de chay js trong thymeleaf html 
-			
-			    let myChart = document.getElementById('myChart').getContext('2d');
-			    // Global Options
-			    Chart.defaults.global.defaultFontFamily = 'Lato';
-			    Chart.defaults.global.defaultFontSize = 18;
-			    Chart.defaults.g
-			    let massPopChart = new Chart(myChart, {
-			      type:'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-			      data:{
-			        labels:/*[[${listTime}]]*/,
-			        datasets:[{
-			          label:'Temperature',      
-			          data:/*[[${listData}]]*/,      
-			          backgroundColor:'rgba(255, 99, 132, 0.6)',             
-			          fill: false,
-			          borderWidth:1,
-			          borderColor:'rgba(255, 0, 0, 0.6)', //thay doi mau cho Line
-			          hoverBorderWidth:1,
-			          hoverBorderColor:'#111',
-			          pointRadius: 5
-			        }]
-			      },
-			      options: {  	  
-			    	  legend : {
-			    		  display: false,
-			    	  },
-			    	  responsive :  true ,
-			          maintainAspectRatio: false,         
-			          plugins: { //plugin dung de hien thi gia tri len bieu do
-			              datalabels: {
-			            	  	display: function(context) {
-			            		    return context.dataIndex % 1; 
-			            		},
-			    				backgroundColor: function(context) {
-			    					return context.dataset.backgroundColor;
-			    				},
-			    				backgroundColor: 'rgba(255, 255, 255,0)',
-			    				borderRadius: 2,
-			    				anchor : 'start',
-			    				align : 'top',
-			    				color: 'black',
-			    				font: {
-			    					weight: 'bold'
-			    				},
-			    				formatter: Math.round
-			    			}
-			    		},
-			          scales: {//scales dung de cai dat option cho cot X,Y
-			              yAxes: [{
-			                  ticks: {
-			                      fontColor : 'blue'
-			                  },
-			              }],
-			              xAxes: [{
-			                  ticks: {
-			                      fontColor: 'blue'
-			                  },
-			              }]
-			          }
-			      }
-			    });    
-			    </script>  
-			</div>		
-		</div>
-		</body>
-	</html>     
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div style="position:relative;left:50px;top:5px;">
+    <!-- Position: relative(tuong quan theo left,right,bottom,top), absolute,fixed -->
+    <a href="/home">Home</a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.5.0"></script>
+<!-- thu vien dung de hien thi gia tri tren bieu do -->
+
+<div class="container">
+    <canvas id="ChartLine"></canvas>
+</div>
+<div class="container">
+    <canvas id="myChart" width="350" height="350"></canvas>
+</div>
+
+<body>
+<div id="container">
+
+    <form action="#" th:action="@{/ReqChartLine}" th:object="${greeting}" method="post">
+        Enter a date :<br>
+        <select name="time" th:field="*{time}">
+            <option value="00" selected>0h</option>
+            <option value="01" >1h</option>
+            <option value="02">2h</option>
+            <option value="03">3h</option>
+            <option value="04">4h</option>
+            <option value="05">5h</option>
+            <option value="06">6h</option>
+            <option value="07">7h</option>
+            <option value="08">8h</option>
+            <option value="09">9h</option>
+            <option value="10">10h</option>
+            <option value="11">11h</option>
+            <option value="12">12h</option>
+            <option value="13">13h</option>
+            <option value="14">14h</option>
+            <option value="15">15h</option>
+            <option value="16">16h</option>
+            <option value="17">17h</option>
+            <option value="18">18h</option>
+            <option value="19">19h</option>
+            <option value="20">20h</option>
+            <option value="21">21h</option>
+            <option value="22">22h</option>
+            <option value="23">23h</option>
+        </select>
+        <input id="dateId" type="date" th:field="*{date}"><br>
+        <input type="submit">
+    </form>
+    <div th:object="${greeting}">
+        <span th:text="*{time}"></span>
+        <span th:text="*{date}"></span>
+    </div>
+
+    <div id="content">
+        <script th:inline="javascript"> //dung de chay js trong thymeleaf html
+
+        let myChart = document.getElementById('myChart').getContext('2d');
+        // Global Options
+        Chart.defaults.global.defaultFontFamily = 'Lato';
+        Chart.defaults.global.defaultFontSize = 18;
+        Chart.defaults.g
+        let massPopChart = new Chart(myChart, {
+            type: 'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+            data: {
+                labels:/*[[${listTime}]]*/,
+                datasets: [{
+                    label: 'Temperature',
+                    data:/*[[${listData}]]*/,
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                    fill: false,
+                    borderWidth: 1,
+                    borderColor: 'rgba(255, 0, 0, 0.6)', //thay doi mau cho Line
+                    hoverBorderWidth: 1,
+                    hoverBorderColor: '#111',
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                legend: {
+                    display: false,
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { //plugin dung de hien thi gia tri len bieu do
+                    datalabels: {
+                        display: function (context) {
+                            return context.dataIndex % 1;
+                        },
+                        backgroundColor: function (context) {
+                            return context.dataset.backgroundColor;
+                        },
+                        backgroundColor: 'rgba(255, 255, 255,0)',
+                        borderRadius: 2,
+                        anchor: 'start',
+                        align: 'top',
+                        color: 'black',
+                        font: {
+                            weight: 'bold'
+                        },
+                        formatter: Math.round
+                    }
+                },
+                scales: {//scales dung de cai dat option cho cot X,Y
+                    yAxes: [{
+                        ticks: {
+                            fontColor: 'blue'
+                        },
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontColor: 'blue'
+                        },
+                    }]
+                }
+            }
+        });
+
+        </script>
+    </div>
+</div>
+</body>
+</html>
